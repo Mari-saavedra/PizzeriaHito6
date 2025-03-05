@@ -1,10 +1,12 @@
-import { useCart } from '../store/CartContext.jsx'
 import { formateaNumero } from '../utils/utiles.js'
 import { Nav, Navbar, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import { useContext } from 'react'
+import { CartContext } from '../store/CartContext.jsx'
+
 const MiNavbar = () => {
-  const { total } = useCart() // 👈 Obtenemos el total del carrito
+  const { total } = useContext(CartContext)
   const token = false
 
   return (

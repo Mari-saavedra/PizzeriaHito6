@@ -1,6 +1,5 @@
 import Header from '../components/Header'
 import CardPizza from '../components/CardPizza'
-
 import { useEffect, useState } from 'react'
 
 const Home = () => {
@@ -8,24 +7,26 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
 
   const getPizzas = async () => {
-    const res = await fetch('http://localhost:5000/api/pizzas')
-    const data = await res.json()
-
-    return setPizzas(data)
+    try {
+      const res = await fetch('http://localhost:5000/api/pizzas')
+      const data = await res.json()
+      setPizzas(data)
+    } catch (error) {
+      console.error('Error al obtener las pizzas:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     getPizzas()
-    setLoading(false)
   }, [])
 
   return (
     <>
       <Header />
-
       <div className='container p-3'>
-        {
-        loading
+        {loading
           ? (
             <div className='d-flex justify-content-center align-items-center' style={{ height: '50vh' }}>
               <div className='spinner-border text-primary' role='status' />
@@ -33,7 +34,7 @@ const Home = () => {
             )
           : (
             <div className='d-flex justify-content-center gap-3 flex-wrap p-0 m-0'>
-              {pizzas.map(pizza => (
+              {pizzas.map((pizza) => (
                 <CardPizza
                   key={pizza.id}
                   id={pizza.id}
@@ -44,8 +45,7 @@ const Home = () => {
                 />
               ))}
             </div>
-            )
-        }
+            )}
       </div>
     </>
   )
