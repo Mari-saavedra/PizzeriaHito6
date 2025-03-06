@@ -6,57 +6,71 @@ import { CartContext } from '../store/CartContext.jsx'
 const Cart = () => {
   const { cartItems, total, handleSumar, handleRestar } = useContext(CartContext)
 
-  return (
-    <div className='container mt-2 mb-2 p-3 bg-muted border border-1 border-secondary' style={{ maxWidth: '30rem' }}>
-      <h4>Detalle del pedido:</h4>
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
-      {cartItems.length === 0
-        ? (
-          <p className='text-center mt-3'>Tu carrito está vacío.</p>
-          )
-        : (
+  return (
+    <div className='container mt-2 mb-2 p-3 bg-muted border border-1 border-secondary' style={{ width: '30rem' }}>
+      <div className='d-flex flex-column'>
+        <h4>Detalle del pedido:</h4>
+        <form onSubmit={handleSubmit}>
           <div className='d-flex flex-column gap-2 mt-2 mb-2'>
-            {cartItems.map(({ id, img, name, price, count }) => (
-              <div key={id} className='d-flex align-items-center gap-2'>
+            {cartItems.map((cart) => (
+              <div key={cart.id} className='d-flex flex-row align-items-center gap-2'>
                 <img
                   className='border border-1 border-muted'
-                  src={img}
-                  alt={name}
+                  src={cart.img}
+                  alt={cart.name}
                   style={{ width: '80px', height: '60px', objectFit: 'cover', borderRadius: '8px' }}
                 />
 
                 <div className='d-flex justify-content-between flex-grow-1 m-2'>
-                  <p className='fw-bold m-0'>{name}</p>
-                  <p className='fw-bold m-0'>${formateaNumero(price)}</p>
+                  <p className='fw-bold m-0'>{cart.name}</p>
+                  <p className='fw-bold m-0'>${formateaNumero(cart.price)}</p>
                 </div>
 
-                <div className='d-flex align-items-center'>
+                <div className='d-flex'>
                   <button
-                    style={{ width: '30px', height: '30px', fontSize: '12px' }}
+                    style={{ width: '30px', height: '30px', fontSize: '10px' }}
                     className='btn btn-outline-danger'
-                    onClick={() => handleRestar(id)}
-                  >
-                    -
+                    onClick={() => handleRestar(cart.id)}
+                  >-
                   </button>
 
-                  <span className='border-0 fw-bold text-center' style={{ width: '30px', fontSize: '14px' }}>
-                    {count}
-                  </span>
+                  <input
+                    type='text'
+                    value={cart.count}
+                    readOnly
+                    className='border-0 fw-bold text-center'
+                    style={{ width: '30px', height: '30px', fontSize: '13px' }}
+                  />
 
                   <button
-                    style={{ width: '30px', height: '30px', fontSize: '12px' }}
+                    style={{ width: '30px', height: '30px', fontSize: '10px' }}
                     className='btn btn-outline-primary'
-                    onClick={() => handleSumar(id)}
-                  >
-                    +
+                    onClick={() => handleSumar(cart.id)}
+                  >+
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          )}
+          <div className='d-flex mt-4 mb-4 p-0'>
+            <h4 className='m-0'>Total: $ {formateaNumero(total)}</h4>
 
-      <h4 className='mt-4 mb-4'>Total: $ {formateaNumero(total)}</h4>
+          </div>
+
+          <div className='d-flex flex-column'>
+            <button
+              type='submit'
+              className='btn btn-dark' style={{ width: '90px', height: '45px', fontSize: '15px' }}
+            >Pagar
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
   )
 }

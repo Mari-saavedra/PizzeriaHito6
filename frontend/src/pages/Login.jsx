@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
-import Toastify from 'toastify-js'
-import 'toastify-js/src/toastify.css'
 
 const Login = () => {
   const [login, setLogin] = useState({

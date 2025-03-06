@@ -1,0 +1,1 @@
+Se incluye el consumo de la API desde un Context (punto 6 opcional)

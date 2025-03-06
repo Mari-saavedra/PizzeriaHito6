@@ -17,18 +17,28 @@ const MiNavbar = () => {
         <Navbar.Toggle aria-controls='navbarNav' />
         <Navbar.Collapse id='navbarNav'>
           <Nav className='me-auto d-flex gap-2'>
-            <Link to='/' className='text-decoration-none ms-3 text-white'>🍕 Home</Link>
+            <Link to='/' className='text-decoration-none ms-3 text-white'>
+              <Button variant='dark' className='btn btn-dark btn-outline-light btn-sm'>🍕Home</Button>
+            </Link>
             {token
               ? (
                 <>
-                  <Link to='/profile' className='text-decoration-none ms-3 text-white'>Profile</Link>
-                  <Link to='/logout' className='text-decoration-none ms-3 text-white'>🔓 Logout</Link>
+                  <Link to='/profile' className='text-decoration-none ms-3 text-white'>
+                    <Button variant='dark' className='btn btn-dark btn-outline-light btn-sm'>🔓Profile</Button>
+                  </Link>
+                  <Link to='/logout' className='text-decoration-none ms-3 text-white'>
+                    <Button variant='dark' className='btn btn-dark btn-outline-light btn-sm'>🔓Logout</Button>
+                  </Link>
                 </>
                 )
               : (
                 <>
-                  <Link to='/login' className='text-decoration-none ms-3 text-white'>Login</Link>
-                  <Link to='/register' className='text-decoration-none ms-3 text-white'>Register</Link>
+                  <Link to='/login' className='text-decoration-none ms-3 text-white'>
+                    <Button variant='dark' className='btn btn-dark btn-outline-light btn-sm'>🔐Login</Button>
+                  </Link>
+                  <Link to='/register' className='text-decoration-none ms-3 text-white'>
+                    <Button variant='dark' className='btn btn-dark btn-outline-light btn-sm'>🔐Register</Button>
+                  </Link>
                 </>
                 )}
           </Nav>
